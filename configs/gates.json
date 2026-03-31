@@ -1,0 +1,84 @@
+{
+  "gates": [
+    {
+      "name": "quality_recall",
+      "type": "FAIL",
+      "operator": ">=",
+      "threshold": 0.90,
+      "track": "quality",
+      "description": "Challenger must catch at least 90% of injected quality faults"
+    },
+    {
+      "name": "quality_precision",
+      "type": "FAIL",
+      "operator": ">=",
+      "threshold": 0.80,
+      "track": "quality",
+      "description": "At least 80% of flagged rows must be actual faults"
+    },
+    {
+      "name": "quality_f1",
+      "type": "FAIL",
+      "operator": ">=",
+      "threshold": 0.85,
+      "track": "quality",
+      "description": "Balanced quality detection effectiveness"
+    },
+    {
+      "name": "quality_fpr",
+      "type": "WARN",
+      "operator": "<=",
+      "threshold": 0.15,
+      "track": "quality",
+      "description": "False positive rate on clean quality data"
+    },
+    {
+      "name": "challenger_beats_baseline_quality",
+      "type": "FAIL",
+      "operator": ">=",
+      "threshold": 1.0,
+      "track": "quality",
+      "description": "Challenger recall must meet or exceed baseline recall"
+    },
+    {
+      "name": "sudden_drift_sensitivity",
+      "type": "FAIL",
+      "operator": ">=",
+      "threshold": 0.90,
+      "track": "drift",
+      "description": "Detection rate on abrupt distribution shifts"
+    },
+    {
+      "name": "gradual_drift_sensitivity",
+      "type": "FAIL",
+      "operator": ">=",
+      "threshold": 0.70,
+      "track": "drift",
+      "description": "Detection rate on slow distribution drift"
+    },
+    {
+      "name": "drift_fpr",
+      "type": "WARN",
+      "operator": "<=",
+      "threshold": 0.20,
+      "track": "drift",
+      "description": "False positive rate on stable drift data"
+    },
+    {
+      "name": "new_category_sensitivity",
+      "type": "WARN",
+      "operator": ">=",
+      "threshold": 0.80,
+      "track": "drift",
+      "description": "Detection rate when new categories appear in a column"
+    },
+    {
+      "name": "challenger_beats_baseline_drift",
+      "type": "FAIL",
+      "operator": ">=",
+      "threshold": 1.0,
+      "track": "drift",
+      "description": "Challenger combined drift score must meet or exceed baseline"
+    }
+  ]
+}
