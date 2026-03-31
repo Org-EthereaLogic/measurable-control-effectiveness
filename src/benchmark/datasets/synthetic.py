@@ -102,6 +102,7 @@ def _inject_faults(
     # Type error injection
     n_type = max(1, int(n * profile.type_error_rate))
     type_indices = rng.choice(n, size=n_type, replace=False).tolist()
+    faulted[profile.type_error_column] = faulted[profile.type_error_column].astype(object)
     faulted.loc[type_indices, profile.type_error_column] = "INVALID"
     manifest["type_error_indices"] = sorted(type_indices)
 

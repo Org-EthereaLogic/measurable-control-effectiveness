@@ -125,16 +125,17 @@ The 10 gates are defined in `configs/gates.json`:
 
 The key innovation in the challenger drift detector is **windowed trend
 analysis**. The baseline detector compares overall value proportions between
-reference and test data — which works for sudden shifts but misses gradual
-drift where the aggregate proportions haven't shifted enough to cross the
-threshold.
+reference and test data, while the challenger adds a second path that looks for
+ordered distribution change inside the test set itself.
 
 The challenger splits the test data into ordered halves and compares the
 entropy of each half. If the distribution is shifting progressively (as in
 gradual drift), the second half will have measurably lower entropy than the
-first — even when the overall entropy hasn't changed enough to trigger a
-point comparison. This is what allows the challenger to detect gradual drift
-that the proportion-based baseline misses.
+first — even when the overall entropy has not moved enough to trigger a point
+comparison. In the current `seed=42` benchmark, both detectors flag the seeded
+gradual scenario, but the challenger still provides a more robust detection
+path and is the only approach that catches the injected novel category
+scenario.
 
 ## Repo Map
 

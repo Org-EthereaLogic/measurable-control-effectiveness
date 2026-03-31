@@ -16,7 +16,7 @@ This repository implements a **reproducible benchmark** that runs data controls 
 | ------------------- | ------ |
 | What business risk does this address? | Organizations invest in data quality tooling without measurable evidence of its effectiveness. When a failure reaches production, there is no way to determine whether the controls were inadequate or simply misconfigured. |
 | What does this solution demonstrate? | A dual-track benchmark that injects known quality and drift failures, runs both a custom approach and an industry-standard alternative against them, and produces ground-truth-scored evidence across 10 configured gates. |
-| Why does it matter? | It transforms the conversation from "we have controls in place" to "our controls catch 100% of injected quality failures and outperform the baseline on every drift scenario — here is the reproducible evidence." |
+| Why does it matter? | It transforms the conversation from "we have controls in place" to "our controls catch 100% of injected quality failures and show measured lift over the baseline where the challenger adds value — here is the reproducible evidence." |
 
 ## The business problem
 
@@ -53,7 +53,7 @@ The challenger catches every injected quality failure. The baseline misses appro
 | FPR (stable data) | 0.0000 | 0.0000 |
 | Combined score | 0.6667 | **1.0000** |
 
-Both approaches detect sudden shifts equally. The challenger's windowed trend analysis catches gradual drift and detects novel category injection that the proportion-based baseline misses entirely.
+In the current seeded benchmark, both approaches detect the sudden and gradual drift scenarios. The challenger's measured lift comes from detecting novel category injection that the proportion-based baseline misses entirely, which raises the challenger's combined drift score above the baseline.
 
 ### Gate evaluation
 
