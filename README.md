@@ -1,5 +1,7 @@
 # You Invested in Data Quality Controls. Can You Prove They Work?
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4f8278ed00124713a8f101dfa32845aa)](https://app.codacy.com/gh/Org-EthereaLogic/measurable-control-effectiveness?utm_source=github.com&utm_medium=referral&utm_content=Org-EthereaLogic/measurable-control-effectiveness&utm_campaign=Badge_Grade)
+
 **Enterprise Data Trust — Chapter 3: Measurable Control Effectiveness**
 
 Built by Anthony Johnson | EthereaLogic LLC
