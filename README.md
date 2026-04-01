@@ -18,6 +18,33 @@ This repository implements a **reproducible benchmark** that runs data controls 
 | What does this solution demonstrate? | A dual-track benchmark that injects known quality and drift failures, runs both a custom approach and an industry-standard alternative against them, and produces ground-truth-scored evidence across 10 configured gates. |
 | Why does it matter? | It transforms the conversation from "we have controls in place" to "our controls catch 100% of injected quality failures and show measured lift over the baseline where the challenger adds value — here is the reproducible evidence." |
 
+## Decision / KPI contract
+
+**Business decision:** are the data controls effective enough to trust in production?
+
+The benchmark answers that question with six metrics:
+
+| KPI | Meaning |
+|-----|---------|
+| `quality_recall` | Percentage of injected quality failures the control actually caught |
+| `quality_precision` | Percentage of flagged rows that were real failures (not false alarms) |
+| `quality_f1` | Balanced measure of detection accuracy |
+| `drift_combined_score` | Aggregate drift detection effectiveness across 3 scenarios |
+| `challenger_beats_baseline_quality` | Ratio of challenger recall to baseline recall (must be >= 1.0) |
+| `challenger_beats_baseline_drift` | Ratio of challenger combined drift score to baseline (must be >= 1.0) |
+
+**Control rule:** the benchmark passes only when all 10 gates clear — including the two "beats baseline" gates that require the custom approach to match or exceed the industry-standard alternative on both tracks.
+
+## Why this pattern
+
+Most organizations evaluate data quality tooling based on feature lists, vendor demos, or engineering intuition. None of these produce measurable evidence.
+
+This benchmark pattern addresses three gaps:
+
+- **Ground truth replaces heuristics.** Every injected fault is tracked to exact row indices. Scoring uses the injection manifest as truth, not statistical approximations or threshold tuning.
+- **Dual-track comparison is built in.** The same failures are run through both a baseline (industry-standard) and a challenger (custom) approach. The benchmark doesn't just prove the challenger works — it measures exactly where and by how much it outperforms.
+- **Evidence is structured and auditable.** Every run produces a JSON evidence bundle with quality scores, drift scores, gate verdicts, and metadata. This is the artifact a governance team reviews, not a dashboard screenshot.
+
 ## The business problem
 
 Most enterprise data quality strategies share a common blind spot: they cannot prove their own effectiveness.
