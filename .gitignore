@@ -28,3 +28,6 @@ docs/images/*.png
 
 # Run outputs
 runs/
+
+# Ignore insiders AI rules
+.github/instructions/codacy.instructions.md
