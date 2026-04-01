@@ -26,6 +26,9 @@ docs = [
     "matplotlib>=3.7",
 ]
 
+[project.scripts]
+benchmark-demo = "benchmark.runners.__main__:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]
 

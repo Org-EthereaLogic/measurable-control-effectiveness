@@ -1,7 +1,7 @@
 """Benchmark orchestrator — generates data, runs both tracks, scores, evaluates gates.
 
 Usage:
-    PYTHONPATH=src python -m benchmark.runners --seed 42 --rows 1000
+    benchmark-demo --seed 42 --rows 1000
 """
 
 from __future__ import annotations

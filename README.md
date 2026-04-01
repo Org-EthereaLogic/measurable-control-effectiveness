@@ -102,22 +102,38 @@ For the benchmark architecture, fault injection specifications, and scoring meth
 - **Deterministic benchmarking** enables reproducible control validation on any Databricks compute tier.
 - The benchmark runs locally in pure Python with no infrastructure required — making it accessible for evaluation before platform deployment.
 
+## Portfolio Install Order
+
+Install Chapter One first. `trusted-source-intake` is the canonical home of the
+portfolio launcher:
+
+- `Open Executive Demo.command`
+- `scripts/executive_mode.py`
+- `docs/executive_mode.md`
+
+For the launcher to discover this chapter automatically, clone
+`measurable-control-effectiveness` into the same parent directory as
+`trusted-source-intake`.
+
 ## Reproducibility
+
+Use Python 3.10 or newer.
 
 ```bash
 git clone https://github.com/Org-EthereaLogic/measurable-control-effectiveness.git
 cd measurable-control-effectiveness
 
-python -m venv .venv && source .venv/bin/activate
+python3 -m venv .venv && source .venv/bin/activate
+python -m pip install --upgrade pip setuptools wheel
 pip install -e ".[dev]"
-PYTHONPATH=src pytest tests/ -q                                    # Expected: 37 passed
-PYTHONPATH=src python -m benchmark.runners --seed 42 --rows 1000   # Expected: PASS
+pytest tests/ -q                            # Expected: 37 passed
+benchmark-demo --seed 42 --rows 1000        # Expected: PASS
 ```
 
 Generate an evidence bundle:
 
 ```bash
-PYTHONPATH=src python -m benchmark.runners --seed 42 --rows 1000 --evidence-dir runs/
+benchmark-demo --seed 42 --rows 1000 --evidence-dir runs/
 ```
 
 ## Evidence Appendix
@@ -144,6 +160,9 @@ This validates control effectiveness using deterministic synthetic data with a f
 ## Part of a Series
 
 This is **Chapter 3** of the *Enterprise Data Trust* portfolio — a three-part body of work addressing the full lifecycle of data reliability in enterprise Databricks platforms.
+
+Install Chapter One first if you want the guided portfolio launcher. This
+chapter is designed to run as a sibling repository beside `trusted-source-intake`.
 
 | Chapter | Focus | Repository |
 | ------- | ----- | ---------- |
