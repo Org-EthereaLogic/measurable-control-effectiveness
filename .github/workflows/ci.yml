@@ -12,6 +12,8 @@ env:
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     env:
       CODECOV_PROJECT_TOKEN: ${{ secrets.CODECOV_PROJECT_TOKEN }}
       CODACY_PROJECT_TOKEN: ${{ secrets.CODACY_PROJECT_TOKEN }}
@@ -22,10 +24,10 @@ jobs:
         python-version: ["3.10", "3.11", "3.12"]
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
 
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -62,7 +64,7 @@ jobs:
 
       - name: Upload coverage to Codacy
         if: matrix.python-version == '3.12' && env.ENFORCE_CODACY_COVERAGE == 'true' && (env.CODACY_PROJECT_TOKEN != '' || env.CODACY_API_TOKEN != '')
-        uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        uses: codacy/codacy-coverage-reporter-action@89d6c85cfafaec52c72b6c5e8b2878d33104c699 # v1.3.0
         with:
           project-token: ${{ env.CODACY_PROJECT_TOKEN }}
           api-token: ${{ env.CODACY_API_TOKEN }}
@@ -71,11 +73,13 @@ jobs:
   benchmark-smoke:
     runs-on: ubuntu-latest
     needs: lint-and-test
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6
         with:
           python-version: "3.12"
 
@@ -93,11 +97,13 @@ jobs:
 
   snyk-security:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     env:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       ENFORCE_SNYK_SCAN: ${{ vars.ENFORCE_SNYK_SCAN }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
 
       - name: Skip Snyk unless explicitly enforced
         if: env.ENFORCE_SNYK_SCAN != 'true'
@@ -111,7 +117,7 @@ jobs:
 
       - name: Set up Python 3.12 for Snyk
         if: env.ENFORCE_SNYK_SCAN == 'true' && env.SNYK_TOKEN != ''
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.12"
 
@@ -123,7 +129,7 @@ jobs:
 
       - name: Set up Snyk CLI
         if: env.ENFORCE_SNYK_SCAN == 'true' && env.SNYK_TOKEN != ''
-        uses: snyk/actions/setup@master
+        uses: snyk/actions/setup@9adf32b1121593767fc3c057af55b55db032dc04 # v1
 
       - name: Run Snyk to check for vulnerabilities
         if: env.ENFORCE_SNYK_SCAN == 'true' && env.SNYK_TOKEN != ''
