@@ -6,6 +6,10 @@ Built by Anthony Johnson | EthereaLogic LLC
 
 ---
 
+> If this pattern is useful to your team, consider [starring the repo](https://github.com/Org-EthereaLogic/measurable-control-effectiveness) — it helps others in the Databricks community find it.
+
+---
+
 Every enterprise data platform includes some form of data quality monitoring. Few organizations can answer a direct question from the CFO: what percentage of failures would your controls actually catch?
 
 This chapter demonstrates a measurable way to show how often data controls catch known failure scenarios, and where they outperform standard approaches under the same test conditions.
